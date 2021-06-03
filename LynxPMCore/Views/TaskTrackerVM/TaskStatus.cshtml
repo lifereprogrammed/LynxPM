@@ -1,0 +1,158 @@
+﻿@model LynxPMCore.ViewModels.EquipmentAreaStatusListVM
+
+@{
+    ViewData["Title"] = "TaskStatus";
+}
+<style>
+    .column:nth-of-type(odd) {
+        background: #e6f0ff !important
+    }
+</style>
+<h2>Areas</h2>
+
+@*firgure out how to have a max number of columns and increase rows based on count*@
+@{int j = Model.areaSArray.GetLength(0); }
+<div class="row">
+
+    @for (int i = 0; i < j; i++)
+    {
+        <div id="row-@Model.areaSArray[i, 0]" class="col-sm-3 column">
+            <h2>@Model.areaSArray[i, 1]</h2>
+
+            Total Tasks: @Model.areaSArray[i, 3]<br />
+            Tasks Overdue: @Model.areaSArray[i, 4]<br />
+            Total Inspection Tasks: @Model.areaSArray[i, 5]<br />
+            Total Action Tasks: @Model.areaSArray[i, 6]
+
+        </div>
+    }
+
+</div>
+<br />
+<br />
+<h2>Equipment Areas</h2>
+@{ j = Model.equipAreaSArray.GetLength(0);}
+<div class="row">
+    @for (int i = 0; i < j; i++)
+    {
+        <div id="eaRow-@Model.equipAreaSArray[i, 0]" class="col-sm-3 column">
+            <h2>@Model.equipAreaSArray[i, 1]</h2>
+            Total tasks: @Model.equipAreaSArray[i, 3]<br />
+            Total Overdue: @Model.equipAreaSArray[i, 4]<br />
+            Total Inspection Items: @Model.equipAreaSArray[i, 5]<br />
+            Total Action Items: @Model.equipAreaSArray[i, 6]
+        </div>
+
+    }
+</div>
+<br />
+<br />
+<h2>Equipment</h2>
+@{ j = Model.equipSArray.GetLength(0); }
+<div class="row">
+    @for (int i = 0; i < j; i++)
+    {
+        <div id="eaRow-@Model.equipSArray[i,0]" class="col-sm-4 column">
+            <strong>@Model.equipSArray[i, 1]</strong><br />
+            Total tasks: @Model.equipSArray[i, 3]<br />
+            Total Overdue: @Model.equipSArray[i, 4]<br />
+            Total Ispection Tasks: @Model.equipSArray[i, 5]<br />
+            Total Action Tasks: @Model.equipSArray[i, 6]
+        </div>
+
+    }
+</div>
+<br />
+<br />
+<a id="myLink" title="Click to do something" href="PleaseEnableJavascript.html" onclick="showhide(); return false;">Show/Hide</a>
+<br />
+<div id="newpost" style="display:none">
+    <p>
+        JavaScript is the programming language of HTML and the Web. <br />
+        Programming makes computers do what you want them to do. <br />
+        JavaScript is easy to learn.
+    </p>
+</div>
+<button id="button" onclick="showhide()">Show/Hide</button>
+<br />
+<br />
+<h2>Tasks</h2>
+<table class="table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>0 - ID</th>
+            <th>1 - Most Recent Date</th>
+            <th>2 - Due Status</th>
+            <th>3 - Most Recent Date</th>
+            <th>4 - Equipment ID</th>
+            <th>5 - Action</th>
+            <th>6 - </th>
+            <th>7 - Term Days</th>
+            <th>8 - Date Should have completed</th>
+        </tr>
+    </thead>
+    @for (int i = 0; i < Model.taskSArray.GetLength(0); i++)
+    {
+        <tr>
+            <td>@Model.taskSArray[i, 0]</td>
+            <td>@Model.taskSArray[i, 1]</td>
+            <td>@Model.taskSArray[i, 2]</td>
+            <td>@Model.taskSArray[i, 3]</td>
+            <td>@Model.taskSArray[i, 4]</td>
+            <td>@Model.taskSArray[i, 5]</td>
+            <td>@Model.taskSArray[i, 6]</td>
+            <td>@Model.taskSArray[i, 7]</td>
+            <td>@Model.taskSArray[i, 8]</td>
+        </tr>
+
+    }
+</table>
+<br />
+<br />
+
+
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+@*<script>
+    $(function () {
+        $("#areaSelectID").change(function () {
+
+            var url = '@Url.Content("~/")' + "Equipments/getequipareabyID";
+            var ddlsource = "#areaSelectID";
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $("#eaSelectID").empty();
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                });
+                $("#eaSelectID").html(items);
+            })
+        });
+    });
+
+</script>*@
+
+<script>
+    function showhide() {
+
+            var i;
+            for (i = 0; i < @Model.areaSArray.GetLength(0); i++) {
+
+
+
+            }
+            var div = document.getElementById("newpost");
+            if (div.style.display !== "none") {
+                div.style.display = "none";
+            }
+            else {
+                div.style.display = "block";
+            }
+    }
+        function getData() {
+            data = JSON.parse(@Url.Content("~/" +"TaskTrackerVM/getStatusVM"));
+
+        }
+</script>
+

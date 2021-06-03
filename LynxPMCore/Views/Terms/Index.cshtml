@@ -1,0 +1,59 @@
+﻿@model IEnumerable<LynxPMCore.Models.Term>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TermName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TermDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TermShortName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TermDays)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TermLeadTime)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TermName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TermDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TermShortName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TermDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TermLeadTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TermID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TermID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TermID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

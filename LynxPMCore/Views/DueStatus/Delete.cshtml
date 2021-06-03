@@ -1,0 +1,33 @@
+﻿@model LynxPMCore.Models.DueStatus
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DueStatus</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DueStatusName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DueStatusName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DustStatusDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DustStatusDescription)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="DueStatusID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

@@ -1,0 +1,34 @@
+﻿@model LynxPMCore.Models.WorkOrderAssetList
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>WorkOrderAssetList</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="WorkOderID" class="control-label"></label>
+                <input asp-for="WorkOderID" class="form-control" />
+                <span asp-validation-for="WorkOderID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentID" class="control-label"></label>
+                <select asp-for="EquipmentID" class ="form-control" asp-items="ViewBag.EquipmentID"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

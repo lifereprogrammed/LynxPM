@@ -1,0 +1,91 @@
+﻿@model LynxPMCore.Models.Equipment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Equipment</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EquipmentName" class="control-label"></label>
+                <input asp-for="EquipmentName" class="form-control" />
+                <span asp-validation-for="EquipmentName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentDescription" class="control-label"></label>
+                <input asp-for="EquipmentDescription" class="form-control" />
+                <span asp-validation-for="EquipmentDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AreaID" class="control-label"></label>
+                <select id="areaSelectID" name="areaSelectName" asp-for="AreaID" class="form-control" asp-items="ViewBag.AreaID"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EquipmentAreaID" class="control-label"></label>
+                <select id="eaSelectID" name="eaSelectName" asp-for="EquipmentAreaID" class="form-control" asp-items="ViewBag.EquipmentAreaID"></select>
+                <span asp-validation-for="EquipmentAreaID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentAppearance" class="control-label"></label>
+                <input asp-for="EquipmentAppearance" class="form-control" />
+                <span asp-validation-for="EquipmentAppearance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="EquipmentActive" /> @Html.DisplayNameFor(model => model.EquipmentActive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentPictureID" class="control-label"></label>
+                <input asp-for="EquipmentPictureID" class="form-control" />
+                <span asp-validation-for="EquipmentPictureID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentPictureURL" class="control-label"></label>
+                <input asp-for="EquipmentPictureURL" class="form-control" />
+                <span asp-validation-for="EquipmentPictureURL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        $("#areaSelectID").change(function () {
+
+            var url = '@Url.Content("~/")' + "Equipments/getequipareabyID";
+            var ddlsource = "#areaSelectID";
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $("#eaSelectID").empty();
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                });
+                $("#eaSelectID").html(items);
+            })
+        });
+    });
+
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

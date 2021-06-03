@@ -1,0 +1,89 @@
+﻿@model IEnumerable<LynxPMCore.Models.TaskTracker>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskTrackerComments)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskTrackerCompletionDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskTrackerPreviousCompletionDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskTrackerExpectedCompletionDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskTrackerDaystoComplete)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskTrackerRecordUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskTrackerDateStamp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TaskRecordUserIP)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Condition.ConditionDisplayLetter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LTask.LTaskName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskTrackerComments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskTrackerCompletionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskTrackerPreviousCompletionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskTrackerExpectedCompletionDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskTrackerDaystoComplete)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskTrackerRecordUser)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskTrackerDateStamp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskRecordUserIP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Condition.ConditionDisplayLetter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LTask.LTaskName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TaskTrackerID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TaskTrackerID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TaskTrackerID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

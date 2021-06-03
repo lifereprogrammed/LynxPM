@@ -1,0 +1,11 @@
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\bin\Debug\netcoreapp2.0\LynxPMCore.deps.json
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\bin\Debug\netcoreapp2.0\LynxPMCore.runtimeconfig.json
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\bin\Debug\netcoreapp2.0\LynxPMCore.runtimeconfig.dev.json
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\bin\Debug\netcoreapp2.0\LynxPMCore.dll
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\bin\Debug\netcoreapp2.0\LynxPMCore.pdb
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\obj\Debug\netcoreapp2.0\LynxPMCore.csproj.CoreCompileInputs.cache
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\obj\Debug\netcoreapp2.0\LynxPMCore.AssemblyInfoInputs.cache
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\obj\Debug\netcoreapp2.0\LynxPMCore.AssemblyInfo.cs
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\obj\Debug\netcoreapp2.0\LynxPMCore.dll
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\obj\Debug\netcoreapp2.0\LynxPMCore.pdb
+C:\Users\U257\source\repos\LynxPMCore\LynxPMCore\obj\Debug\netcoreapp2.0\LynxPMCore.csprojResolveAssemblyReference.cache

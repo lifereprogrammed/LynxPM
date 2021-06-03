@@ -1,0 +1,54 @@
+﻿@model LynxPMCore.Models.LTask
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>LTask</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="LTaskID" />
+            <div class="form-group">
+                <label asp-for="LTaskName" class="control-label"></label>
+                <input asp-for="LTaskName" class="form-control" />
+                <span asp-validation-for="LTaskName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LTaskDescription" class="control-label"></label>
+                <input asp-for="LTaskDescription" class="form-control" />
+                <span asp-validation-for="LTaskDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TermID" class="control-label"></label>
+                <input asp-for="TermID" class="form-control" />
+                <span asp-validation-for="TermID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentID" class="control-label"></label>
+                <input asp-for="EquipmentID" class="form-control" />
+                <span asp-validation-for="EquipmentID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskTypeID" class="control-label"></label>
+                <input asp-for="TaskTypeID" class="form-control" />
+                <span asp-validation-for="TaskTypeID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

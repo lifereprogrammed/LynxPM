@@ -1,0 +1,181 @@
+﻿@model LynxPMCore.ViewModels.TaskTrackerVM
+
+@{
+    ViewData["Title"] = "TaskTrackerVM";
+}
+<link href="~/css/statusStyle.css" rel="stylesheet" />
+<div style="display:none" class="hiddenid" id="@ViewData["GID"]">@ViewData["GID"]</div>
+<h2>Index</h2>
+<div class="row">
+    <div class="form-group col-sm-4">
+        <label class="control-label">Filter by area:</label>
+        <select id="areaSelectID" name="areaSelectName" class="form-control" asp-items="ViewBag.AreaID"><option id="0">Select</option></select>
+    </div>
+    <div class="form-group col-sm-4">
+        <label class="control-label">Filter by equipment area</label>
+        <select id="eaSelectID" name="eaSelectName" class="form-control" asp-items="ViewBag.EquipmentAreaID"><option id="0">Select</option></select>
+    </div>
+    <div class="form-group col-sm-4">
+        <label class="control-label">Filter by equipment</label>
+        <select id="eqSelectID" name="eqSelectName" class="form-control" asp-items="ViewBag.EquipmentID"><option id="0">Select</option></select>
+    </div>
+</div>
+<div class="hidden">
+    <p>
+        @{ string date = DateTime.Now.ToString("yyyy/MM/dd");}
+        @date
+    </p>
+</div>
+<table class="table table-hover tasktable" data-tasktable="tasktable">
+    <thead>
+        <tr id="tablehead">
+            <th colspan="2" style="max-width:70px">
+                Equipment
+            </th>
+            <th class="hidden-sm hidden-xs" style="max-width:50px">
+                Term
+
+            </th>
+            <th style="max-width:100px">
+                Task
+            </th>
+            <th>
+                Condition
+            </th>
+            <th>
+                Comments
+            </th>
+            <th>
+                Completion Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @{int j = 0;}
+        @foreach (var item in Model.lTask)
+        {
+
+            <tr id="row-@item.LTaskID" class="row" data-area="@item.Equipment.AreaID" data-equiparea="@item.Equipment.EquipmentAreaID" data-equip="@item.EquipmentID">
+                <th style="max-width:50px">
+
+                    @Html.DisplayFor(modelItem => item.Equipment.EquipmentName)
+                </th>
+                <td class="hidden-sm hidden-xs" style="max-width:50px">
+                    @Html.DisplayFor(modelItem => item.Term.TermName)
+                </td>
+                <td style="max-width:100px">
+                    @Html.DisplayFor(modelItem => item.LTaskName)
+                </td>
+                <td style="white-space:nowrap">
+                    @for (int i = 0; i < Model.condition.Count; i++)
+                    {
+                        if (Model.condition[i].ConditionDisplayLetter != "D")
+                        {
+                            @Html.DisplayFor(modelItem => Model.condition[i].ConditionDisplayLetter)@:&nbsp; @Html.RadioButtonFor(m => m.condition, Model.condition[i].ConditionID)
+                        }
+                    }
+                </td>
+                <td>
+                    @*To Do - Bind this input to the task tracker.*@
+                    <input class="form-control" type="text" />
+                </td>
+                <td>
+                    <input class="form-control" type="date" value="@date" />
+                </td>
+            </tr>
+            j = j + 1;
+        }
+    </tbody>
+</table>
+<div class="trackerfooter">
+    @*Make this float on the bottoom so the submit button is always visible.*@
+    <div class="col-xs-12 row" >
+    <input type="submit" value="Save Changes" class="btn btn-warning trackerbutton" />
+        </div>
+</div>
+
+<div style="display:none">@(j)</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        var source = $('.hiddenid');
+        var id = $(source).attr('id');
+        //alert(id);
+        $('tr').hide();
+        $('#tablehead').show();
+        $('tr[data-area=' + id + ']').slideToggle();
+    });
+
+     $(function () {
+        $("#areaSelectID").change(function () {
+
+            var url = '@Url.Content("~/")' + "LTasks/getequipareabyID";
+            var ddlsource = "#areaSelectID";
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $("#eaSelectID").empty();
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                });
+                $("#eaSelectID").html(items);
+            })
+
+            var url2 = '@Url.Content("~/")' + "LTasks/getequipbyAreaID"
+            $.getJSON(url2, { id: $(ddlsource).val() }, function (data) {
+                var items ='';
+                $("#eqSelectID").empty();
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                });
+                $('#eqSelectID').html(items);
+             })
+
+            var id = $(ddlsource).val();
+            $('tr').hide();
+            $('#tablehead').show();
+            $('tr[data-area=' + id + ']').show();
+        });
+    });
+
+    $(function () {
+        $("#eaSelectID").change(function () {
+
+            var url = '@Url.Content("~/")' + "LTasks/getequipbyID";
+            var ddlsource = "#eaSelectID";
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $("#eqSelectID").empty();
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                });
+                $("#eqSelectID").html(items);
+            })
+
+
+            var id = $(ddlsource).val();
+            $('tr').hide();
+            $('#tablehead').show();
+            $('tr[data-equiparea=' + id + ']').show();
+        });
+    });
+
+    $(function () {
+        $('#eqSelectID').change(function () {
+            var ddlsource = "#eqSelectID";
+            var id = $(ddlsource).val();
+            $('tr').hide();
+            $('#tablehead').show();
+            $('tr[data-equip=' + id + ']').show();
+
+        });
+
+    });
+
+    window.onbeforeunload = confirmExit;
+    function confirmExit() {
+        return "You have attempted to leave this page.  If you have made any changes to the fields without clicking the Save button, your changes will be lost.  Are you sure you want to exit this page?";
+    }
+
+</script>

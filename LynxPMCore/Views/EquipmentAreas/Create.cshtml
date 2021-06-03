@@ -1,0 +1,59 @@
+﻿@model LynxPMCore.Models.EquipmentArea
+
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>EquipmentArea</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EquipmentAreaName" class="control-label"></label>
+                <input asp-for="EquipmentAreaName" class="form-control" />
+                <span asp-validation-for="EquipmentAreaName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EquipmentAreaDescription" class="control-label"></label>
+                <input asp-for="EquipmentAreaDescription" class="form-control" />
+                <span asp-validation-for="EquipmentAreaDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AreaID" class="control-label"></label>
+                <select asp-for="AreaID" class="form-control" asp-items="ViewBag.AreaID"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="EquipmentAreaAppearanceOrder" class="control-label"></label>
+                <input asp-for="EquipmentAreaAppearanceOrder" class="form-control" />
+                <span asp-validation-for="EquipmentAreaAppearanceOrder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="EquipmentAreaActive" /> @Html.DisplayNameFor(model => model.EquipmentAreaActive)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,39 @@
+﻿@model LynxPMCore.Models.Condition
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Condition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConditionName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConditionName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConditionDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConditionDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConditionDisplayLetter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConditionDisplayLetter)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ConditionID" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

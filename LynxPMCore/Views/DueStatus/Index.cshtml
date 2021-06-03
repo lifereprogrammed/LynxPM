@@ -1,0 +1,41 @@
+﻿@model IEnumerable<LynxPMCore.Models.DueStatus>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DueStatusName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DustStatusDescription)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DueStatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DustStatusDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.DueStatusID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.DueStatusID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.DueStatusID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

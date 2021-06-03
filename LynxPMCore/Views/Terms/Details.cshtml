@@ -1,0 +1,48 @@
+﻿@model LynxPMCore.Models.Term
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Term</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TermName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TermName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TermDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TermDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TermShortName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TermShortName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TermDays)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TermDays)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TermLeadTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TermLeadTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.TermID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

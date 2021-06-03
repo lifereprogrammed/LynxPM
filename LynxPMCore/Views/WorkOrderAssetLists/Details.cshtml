@@ -1,0 +1,30 @@
+﻿@model LynxPMCore.Models.WorkOrderAssetList
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>WorkOrderAssetList</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkOderID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.WorkOderID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Equipment.EquipmentID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.WorkOrderAssetListID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

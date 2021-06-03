@@ -1,0 +1,36 @@
+﻿@model LynxPMCore.Models.Condition
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Condition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ConditionName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConditionName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConditionDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConditionDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ConditionDisplayLetter)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ConditionDisplayLetter)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ConditionID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

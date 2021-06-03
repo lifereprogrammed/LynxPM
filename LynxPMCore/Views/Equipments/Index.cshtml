@@ -1,0 +1,72 @@
+﻿@model IEnumerable<LynxPMCore.Models.Equipment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentArea.EquipmentAreaName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentAppearance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentPictureID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EquipmentPictureURL)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentArea.EquipmentAreaName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentAppearance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentPictureID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EquipmentPictureURL)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.EquipmentID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.EquipmentID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.EquipmentID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

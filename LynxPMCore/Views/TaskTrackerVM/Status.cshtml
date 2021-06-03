@@ -1,0 +1,116 @@
+﻿@model IEnumerable<LynxPMCore.ViewModels.AreaStatusVM>
+@{
+    ViewData["Title"] = "Status";
+}
+<link href="~/css/statusStyle.css" rel="stylesheet" />
+<h2>Status</h2>
+<div class="divArea row">
+    @foreach (var item in Model)
+    {
+    <div class="col-sm-3 areaColumn" data-toggle="ShowEA" id="@item.AreaID">
+        <div class="loadingbar_container" id="loader">
+            <div class="loadingbar" id="loadingbar">
+                </div>
+        </div>
+
+        <h3>@item.AreaName</h3>
+        <table class="table-responsive table-striped table-condensed">
+            <tr>
+                <td><center>Total Tasks: <br />@item.TotalTasks</center></td>
+                <td><center>Total Overdue: <br />@item.TotalOverdue</center></td>
+            </tr>
+            <tr style="font-size:12px">
+                <td><center>Inspection Tasks: <br />@item.TotalInspection</center></td>
+                <td><center>Action Tasks: <br />@item.TotalAction</center></td>
+            </tr>
+        </table>
+        <a asp-action="Index" asp-route-id="data-area~@item.AreaID" class="btn btn-primary btn-xs">Task Tracker</a>
+    </div>
+    }
+</div>
+<br />
+<br />
+<div class="divEquipArea row" data-toggle="ShowEq">
+    <div class="loadingbar_container" id="loader">
+        <div class="loadingbar" id="loadingbar">
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="divEquip row" data-toggle="ShowTsk">
+    <div class="loadingbar_container" id="loader"><div class="loadingbar" id="loadingbar"></div></div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(function () {
+        var element = $(this);
+        var id = element.attr("id");
+        var $divEquipArea = $(".divEquipArea");
+        var $divEquip = $(".divEquip");
+        var urlEA = '@Url.Content("~/")' + "TaskStatusVM/GetEquipAreaStatus";
+        var urlEq = '@Url.Content("~/")' + "TaskStatusVM/GetEquipStatus"
+        var loader = $('.loadingbar_container');
+        
+
+        $('.divArea').on('click', '.areaColumn', function () {
+            $(this).find(loader).fadeIn(800);
+            $(this).fadeTo(0, 1);
+            $(this).css("background-color", "lightblue");
+            $(this).siblings().css("background-color", "");
+            $(this).siblings().fadeTo(500, 0.5);
+            var areaDivID = $(this).attr('id');
+            $divEquipArea.find('.newEA').remove();
+            $.ajax({
+                type: 'GET',
+                url: '/TaskTrackerVM/GetEquipAreaStatus/' + areaDivID,
+                success: function (data) {
+                    $.each(data, function (i, item) {
+                        $divEquipArea.append('<div class=\"col-sm-3 areaColumn newEA\" id=\"' + item.equipmentAreaID + '\" >'
+                            + '<h4>' + item.equipmentAreaName + '</h4>'
+                            + '<table class=\"table-responsive table-striped tabled-condensed\">'
+                            + '<tr><td><center>Total Tasks:<br />' + item.totalTasks + '</center></td>'
+                            + '<td><center>Total Overdue:<br/>' + item.totalOverdue + '</center></td>'
+                            + '</tr><tr style=\"font-size:12px\"><td><center>Inspection Tasks: <br/>' + item.totalInspection + ' </center></td>'
+                            + '<td><center> Action Tasks: <br/>' + item.totalAction + ' </center></td></tr></table ></div>');  
+                    });
+                }
+            });
+            loader.fadeOut(4000);
+        });
+
+        $('.divEquipArea').on('click', '.newEA', function () {
+            $(this).find('table').show();
+            $(this).find(loader).fadeIn(800);
+            $(this).fadeTo(0, 1);
+            $(this).css("background-color", "coral");
+            $(this).siblings().css("background-color", "");
+            
+            $(this).siblings().fadeTo(500, 0.5);
+            var eaDivID = $(this).attr('id');
+            //alert(eaDivID);
+            $divEquip.find('.newEq').remove();
+            $.ajax({
+                type: 'GET',
+                url: '/TaskTrackerVM/GetEquipStatus/' + eaDivID,
+                success: function (data) {
+                    $.each(data, function (i, item) {
+                        $divEquip.append('<div class=\"col-sm-3 areaColumn newEq\" id=\"' + item.equipmentID + '\" >'
+                            + '<h4>' + item.equipmentName + '</h4>'
+                            + '<table class=\"table-responsive table-striped tabled-condensed eaDetails\">'
+                            + '<tr><td><center>Total Tasks:<br />' + item.totalTasks + '</center></td>'
+                            + '<td><center>Total Overdue:<br/>' + item.totalOverdue + '</center></td>'
+                            + '</tr><tr style=\"font-size:12px\"><td><center>Inspection Tasks: <br/>' + item.totalInspection + ' </center></td>'
+                            + '<td><center> Action Tasks: <br/>' + item.totalAction + ' </center></td></tr></table ></div>');
+                    });
+                }
+            });
+            $(this).siblings().find('table').hide();
+            $(this).siblings().find('.newEA').css("min-height", "0");
+            $(this).siblings().find('.newEA').animate({ height: '15px'});
+            loader.fadeOut(4000);
+        });
+    });
+    
+</script>

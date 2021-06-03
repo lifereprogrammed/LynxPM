@@ -1,0 +1,48 @@
+﻿@model LynxPMCore.Models.LTask
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LTask</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LTaskName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LTaskName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LTaskDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LTaskDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TermID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TermID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EquipmentID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EquipmentID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TaskTypeID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TaskTypeID)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.LTaskID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

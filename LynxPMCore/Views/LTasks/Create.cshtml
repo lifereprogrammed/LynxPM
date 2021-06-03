@@ -1,0 +1,118 @@
+﻿@model LynxPMCore.Models.LTask
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Task</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LTaskName" class="control-label"></label>
+                <input asp-for="LTaskName" class="form-control" />
+                <span asp-validation-for="LTaskName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LTaskDescription" class="control-label"></label>
+                <input asp-for="LTaskDescription" class="form-control" />
+                <span asp-validation-for="LTaskDescription" class="text-danger"></span>
+            </div>
+
+            @* ------------------- Cascading drop downs ---------------------- *@
+            <div class="form-group">
+                <label class="control-label">Area</label>
+                <select id="areaSelectID" name="areaSelectName" class="form-control" asp-items="ViewBag.AreaID"><option id="0">Select</option></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Equipment Area</label>
+                <select id="eaSelectID" name="eaSelectName" class="form-control" asp-items="ViewBag.EquipmentAreaID"><option id="0">Select</option></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Equipment</label>
+                <select asp-for="EquipmentID" id="eqSelectID" name="eqSelectName" class="form-control" asp-items="ViewBag.EquipmentID"><option id="0">Select</option></select>
+            </div>
+            @* --------------------------------------------------------------- *@
+
+            <div class="form-group">
+                <label asp-for="TermID" class="control-label"></label>
+                <select asp-for="TermID" class="form-control" asp-items="ViewBag.TermID"><option id="0">Select</option></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TaskTypeID"></label>
+                <select asp-for="TaskTypeID" class="form-control" asp-items="ViewBag.TaskTypeID"><option id="0">Select</option></select>
+            </div>
+
+            @*<div class="form-group">
+                <label asp-for="TermID" class="control-label"></label>
+                <input asp-for="TermID" class="form-control" />
+                <span asp-validation-for="TermID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                    <label asp-for="EquipmentID" class="control-label"></label>
+                    <input asp-for="EquipmentID" class="form-control" />
+                    <span asp-validation-for="EquipmentID" class="text-danger"></span>
+                </div>
+            <div class="form-group">
+                <label asp-for="TaskTypeID" class="control-label"></label>
+                <input asp-for="TaskTypeID" class="form-control" />
+                <span asp-validation-for="TaskTypeID" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+
+
+     $(function () {
+        $("#areaSelectID").change(function () {
+
+            var url = '@Url.Content("~/")' + "LTasks/getequipareabyID";
+            var ddlsource = "#areaSelectID";
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $("#eaSelectID").empty();
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                });
+                $("#eaSelectID").html(items);
+            })
+        });
+    });
+
+    $(function () {
+        $("#eaSelectID").change(function () {
+
+            var url = '@Url.Content("~/")' + "LTasks/getequipbyID";
+            var ddlsource = "#eaSelectID";
+            $.getJSON(url, { id: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $("#eqSelectID").empty();
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.value + "'>" + row.text + "</option>";
+                });
+                $("#eqSelectID").html(items);
+            })
+        });
+    });
+
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

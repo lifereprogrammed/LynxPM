@@ -1,0 +1,23 @@
+﻿@model IEnumerable<LynxPMCore.ViewModels.EquipmentAreaStatusVM>
+
+
+    <h2>Equipment Areas</h2>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-3 areaColumn" id="@item.EquipmentAreaID">
+                <h3>@item.EquipmentAreaName</h3>
+                <table class="table-responsive table-striped table-condensed">
+                    <tr>
+                        <td><center>Total Tasks: <br />@item.TotalTasks</center></td>
+                        <td><center>Total Overdue: <br />@item.TotalOverdue</center></td>
+                    </tr>
+                    <tr style="font-size:12px">
+                        <td><center>Inspection Tasks: <br />@item.TotalInspection</center></td>
+                        <td><center>Action Tasks: <br />@item.TotalAction</center></td>
+                    </tr>
+                </table>
+            </div>
+
+        }
+    </div>

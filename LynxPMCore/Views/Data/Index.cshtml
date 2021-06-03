@@ -1,0 +1,14 @@
+﻿@model LynxPMCore.Models.DatabaseModels
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<div>
+    <label >Areas</label>
+    <select id="AreaID" name="AreasList" asp-items='@(new SelectList(ViewBag.areas, "AreaID", "AreaName"))'>
+        <option>Select</option>
+    </select>
+
+</div>
+

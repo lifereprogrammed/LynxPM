@@ -1,0 +1,48 @@
+﻿@model LynxPMCore.Models.EquipmentArea
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>EquipmentArea</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EquipmentAreaName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EquipmentAreaName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EquipmentAreaDescription)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EquipmentAreaDescription)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EquipmentAreaAppearanceOrder)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EquipmentAreaAppearanceOrder)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EquipmentAreaActive)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EquipmentAreaActive)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Area)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Area.AreaName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.EquipmentAreaID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
